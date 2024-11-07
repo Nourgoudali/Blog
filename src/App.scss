@@ -1,0 +1,603 @@
+
+$primary-bg-light: #f4f4f9;
+$primary-bg-dark: #1e1e2f;
+$text-dark: #343a40;
+$text-light: #ffffff;
+$hover-color: #61dafb;
+$button-bg-dark: #343a40;
+$button-bg-light: #ffffff;
+$post-bg: #ffffff;
+$post-hover-bg: #f0f8ff;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  transition: background 0.3s, color 0.3s;
+  position: relative;
+
+  &.light-mode {
+    background-color: $primary-bg-light;
+    color: $text-dark;
+
+    .sidebar {
+      background-color: #e0e0e0;
+      color: $text-dark;
+    }
+
+    .toggle-button, .sidebar-toggle {
+      background-color: $button-bg-dark;
+      color: $text-light;
+    }
+
+    a {
+      color: $text-dark;
+
+      &:hover {
+        color: $hover-color;
+      }
+    }
+  }
+
+  &.dark-mode {
+    background-color: $primary-bg-dark;
+    color: $text-light;
+
+    .sidebar {
+      background-color: $button-bg-dark;
+      color: $text-light;
+    }
+
+    .toggle-button, .sidebar-toggle {
+      background-color: $button-bg-light;
+      color: $text-dark;
+    }
+
+    a {
+      color: $text-light;
+
+      &:hover {
+        color: $hover-color;
+      }
+    }
+  }
+}
+
+.sidebar {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 2rem;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  transition: transform 0.3s ease;
+  transform: translateX(-100%);
+
+  &.open {
+    transform: translateX(0);
+  }
+
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: inherit;
+  }
+
+  .site-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: inherit;
+  }
+
+  ul {
+    list-style: none;
+    width: 100%;
+    padding: 0;
+    text-align: center;
+  }
+
+  li {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  a {
+    text-decoration: none;
+    padding: 1rem;
+    display: block;
+    width: 100%;
+    transition: background 0.3s, color 0.3s;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  .toggle-button {
+    margin-top: auto;
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s, color 0.3s;
+    border-radius: 5px;
+  }
+}
+
+.sidebar-toggle {
+  position: fixed;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: $text-dark;
+  transition: opacity 0.3s ease;
+  z-index: 100;
+
+  .arrow {
+    font-size: 1.5rem;
+  }
+
+  .hidden {
+    opacity: 0;
+  }
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  margin-left: 250px;
+  transition: margin-left 0.3s;
+
+  &.sidebar-closed {
+    margin-left: 0;
+  }
+}
+
+.icon {
+  width: 20px;
+  height: auto;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.home-container, .about-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 50px);
+  text-align: center;
+  background-color: $primary-bg-light;
+
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: $text-dark;
+  }
+
+  p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #555;
+  }
+
+  .enter-blog-button, .toggle-button {
+    padding: 0.5rem 1rem;
+    background-color: $button-bg-light;
+    color: $text-dark;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+}
+
+.blog-container {
+  padding: 2rem;
+  color: $text-dark;
+  background-color: $primary-bg-light;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: $text-dark;
+  }
+
+  .post-list {
+    list-style: none;
+    padding: 0;
+
+    .post-item {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border-radius: 8px;
+      background-color: $post-bg;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+      h3 {
+        margin-bottom: 0.5rem;
+        font-size: 1.2rem;
+        color: #007bff;
+      }
+
+      p {
+        font-size: 1rem;
+        color: #555;
+      }
+
+      &:hover {
+        background-color: $post-hover-bg;
+      }
+    }
+  }
+
+  .loading,
+  .error {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #555;
+  }
+}
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  background-color: $primary-bg-light;
+  color: $text-dark;
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: $text-dark;
+  }
+
+  p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: $text-dark;
+    max-width: 600px;
+  }
+
+  .view-blogs-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    color: $text-light;
+    background-color: $button-bg-dark;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+
+    &:hover {
+      background-color: darken($button-bg-dark, 10%);
+    }
+  }
+}
+.blog-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+  text-align: center;
+  color: $text-dark;
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: $text-dark;
+  }
+
+  .error-message {
+    color: red;
+    font-size: 1.2rem;
+  }
+
+  .blog-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+
+    @media (min-width: 600px) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .blog-item {
+      background-color: $post-bg;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .blog-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: $text-dark;
+      }
+
+      .blog-content {
+        font-size: 1rem;
+        color: #555;
+        line-height: 1.6;
+      }
+    }
+  }
+}
+.create-blog {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: $primary-bg-light;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: $text-dark;
+
+  h1 {
+    text-align: center;
+    color: $text-dark;
+    margin-bottom: 1.5rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      margin-top: 1rem;
+      font-weight: bold;
+      color: $text-dark;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      resize: vertical;
+      font-size: 1rem;
+
+      &:focus {
+        border-color: $hover-color;
+        outline: none;
+      }
+    }
+
+    button {
+      margin-top: 1.5rem;
+      padding: 0.75rem;
+      background-color: $button-bg-dark;
+      color: $text-light;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+
+      &:hover {
+        background-color: darken($button-bg-dark, 10%);
+      }
+    }
+  }
+}
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  background-color: $primary-bg-light; // Use your light background color
+  color: $text-dark; // Use your dark text color
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: $text-dark;
+  }
+
+  p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: $text-dark;
+    max-width: 600px;
+  }
+
+  .view-blogs-button,
+  .create-blog-button,
+  .view-about-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    color: $text-light; // Light text color for button
+    background-color: $button-bg-dark; // Dark background color for button
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0.5rem; // Add some space between buttons
+    transition: background 0.3s;
+
+    &:hover {
+      background-color: darken($button-bg-dark, 10%);
+    }
+  }
+}
+
+.about-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: $primary-bg-light; // Use your light background color
+  color: $text-dark; // Use your dark text color
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: $text-dark;
+  }
+
+  p {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: $text-dark;
+  }
+}     
+
+
+// Define color and style variables to keep the theme consistent
+// Colors
+/*
+$primary-color: #4a90e2;
+$secondary-color: #333; // Darker text color for better contrast
+$background-color: #f4f6f9;
+$button-color: $primary-color;
+$button-hover-color: darken($button-color, 10%);
+$input-border-color: #ccc;
+$navbar-background: #fff;
+$navbar-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+// Global Styles
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: $background-color;
+  color: $secondary-color;
+}
+
+// App Container
+.app {
+  display: flex;
+  flex-direction: column; // Stack navbar and main content vertically
+  height: 100vh; // Full height of the viewport
+
+  // Main content area
+  .main-content {
+    flex: 1; // Allow main content to fill available space
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; // Add padding to main content
+  }
+}
+
+// Navbar Styling
+.navbar {
+  background-color: $navbar-background;
+  box-shadow: $navbar-shadow;
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0 0 8px 8px; // Round bottom corners only
+  font-size: 1.2rem;
+
+  .logo {
+    font-weight: bold;
+    color: $primary-color;
+    font-size: 1.5rem;
+  }
+
+  .logout-button {
+    padding: 10px 16px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: $button-color;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    outline: none;
+
+    &:hover {
+      background-color: $button-hover-color;
+      transform: translateY(-2px); // Slight lift effect
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba($primary-color, 0.3); // Focus outline
+    }
+  }
+}
+
+// Login Form Styling
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%; // Full width for better alignment
+  max-width: 350px; // Limit maximum width for login form
+  margin-top: 20px; // Add some margin at the top
+
+  input {
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid $input-border-color;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    background-color: #fff;
+
+    &:focus {
+      border-color: $primary-color;
+    }
+  }
+
+  button[type="submit"] {
+    padding: 12px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: $button-color;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+
+    &:hover {
+      background-color: $button-hover-color;
+      transform: translateY(-2px); // Slight lift effect
+    }
+  }
+}
+*/
